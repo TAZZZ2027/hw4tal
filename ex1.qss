@@ -29,21 +29,23 @@ QPushButton {
 
 #chooseButton {
     color: #263d31;
-    background-color: #c6dcaa;
+    background-color: #f2df91;
 }
 
 #chooseButton:hover {
-    background-color: #b6d194;
+    background-color: #c7e2f2;
 }
 
-#updateButton {
+#updateButton,
+#updateGradeButton {
     color: #4a3912;
     background-color: #f2df91;
     border: 2px solid #61263c;
 }
 
-#updateButton:hover {
-    background-color: #ead477;
+#updateButton:hover,
+#updateGradeButton:hover {
+    background-color:  #c7e2f2;
 }
 
 #aboutButton {

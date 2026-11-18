@@ -4,6 +4,9 @@ import sys
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QApplication,
+    QComboBox,
+    QDialog,
+    QDoubleSpinBox,
     QHBoxLayout,
     QLabel,
     QMainWindow,
@@ -53,12 +56,16 @@ class GradeManagerWindow(QMainWindow):
 
         self.update_button = QPushButton("Update File")
         self.update_button.setObjectName("updateButton")
+        self.update_grade_button = QPushButton("Update Grade")
+        self.update_grade_button.setObjectName("updateGradeButton")
+        self.update_grade_button.clicked.connect(self.show_update_grade_dialog)
         self.about_button = QPushButton("About")
         self.about_button.setObjectName("aboutButton")
         self.about_button.clicked.connect(self.show_about)
 
         actions.addWidget(self.choose_button)
         actions.addWidget(self.update_button)
+        actions.addWidget(self.update_grade_button)
         actions.addStretch()
         actions.addWidget(self.about_button)
         layout.addLayout(actions)
@@ -98,6 +105,28 @@ class GradeManagerWindow(QMainWindow):
         footer = QLabel("50 student records")
         footer.setObjectName("tableFooter")
         layout.addWidget(footer)
+
+    def show_update_grade_dialog(self) -> None:
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Update Grade")
+
+        layout = QVBoxLayout(dialog)
+
+        student_id_label = QLabel("Student ID")
+        student_id_combo = QComboBox()
+        student_id_combo.addItems(str(student_id) for student_id in self.student_ids)
+        layout.addWidget(student_id_label)
+        layout.addWidget(student_id_combo)
+
+        score_label = QLabel("Score / Bonus")
+        score_input = QDoubleSpinBox()
+        layout.addWidget(score_label)
+        layout.addWidget(score_input)
+
+        submit_button = QPushButton("Submit")
+        layout.addWidget(submit_button)
+
+        dialog.exec()
 
     def show_about(self) -> None:
         QMessageBox.about(
