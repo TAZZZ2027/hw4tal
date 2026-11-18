@@ -113,12 +113,24 @@ class GradeManagerWindow(QMainWindow):
         self, "Choose Student File", "", "CSV Files (*.csv);;All Files (*)")
       if self.selected_file:
         with open(self.selected_file, 'r') as f:
+            next(f)
             for l in f:
                 self.l_student = l.split(',')
-                self.student_ids.append(self.l_student[0])
-                self.original_grades.append(self.l_student[1])
+                self.student_ids.append(int(self.l_student[0]))
+                self.original_grades.append(int(self.l_student[1]))
+                self.corrected_grades.append(int(self.l_student[1]))
+        self.update_table()
 
-      
+
+    def update_table(self):
+        num_rows = 49
+        self.table.setRowCount(num_rows)
+
+        for i in range(num_rows):
+            self.table.setItem(i, 0, QTableWidgetItem(str(self.student_ids[i])))
+            self.table.setItem(i, 1, QTableWidgetItem(str(self.original_grades[i])))
+            self.table.setItem(i, 2, QTableWidgetItem(str(self.corrected_grades[i])))
+
 
 def main() -> int:
     app = QApplication(sys.argv)
