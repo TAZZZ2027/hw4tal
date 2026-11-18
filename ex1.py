@@ -13,12 +13,21 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QVBoxLayout,
     QWidget,
+    QFileDialog
 )
 
 
 class GradeManagerWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
+
+        self.l_student = []
+        self.student_ids = [] 
+        self.original_grades = [] 
+        self.corrected_grades = [] 
+        self.selected_file = ''
+
+
         self.setWindowTitle("Student Grade Manager")
         self.resize(960, 680)
         self.setMinimumSize(720, 520)
@@ -40,6 +49,8 @@ class GradeManagerWindow(QMainWindow):
 
         self.choose_button = QPushButton("Choose a Student")
         self.choose_button.setObjectName("chooseButton")
+        self.choose_button.clicked.connect(self.Choose_file_fun)
+
         self.update_button = QPushButton("Update File")
         self.update_button.setObjectName("updateButton")
         self.about_button = QPushButton("About")
@@ -95,6 +106,19 @@ class GradeManagerWindow(QMainWindow):
             "Student Grade Manager\nReview original grades and enter corrections.",
         )
 
+
+    def Choose_file_fun(self):
+      #  self.selected_file = "grades.csv" - השורה הזאת מכוונת אותי לקובץ מסויים וההוראה הייתה שהמשתמש יעלה קובץ מהמחשב, נעזרתי בצאט
+      self.selected_file, _ = QFileDialog.getOpenFileName(
+        self, "Choose Student File", "", "CSV Files (*.csv);;All Files (*)")
+      if self.selected_file:
+        with open(self.selected_file, 'r') as f:
+            for l in f:
+                self.l_student = l.split(',')
+                self.student_ids.append(self.l_student[0])
+                self.original_grades.append(self.l_student[1])
+
+      
 
 def main() -> int:
     app = QApplication(sys.argv)
