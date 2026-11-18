@@ -142,9 +142,9 @@ class GradeManagerWindow(QMainWindow):
 
 
     def Choose_file_fun(self):
-      #  self.selected_file = "grades.csv" - השורה הזאת מכוונת אותי לקובץ מסויים וההוראה הייתה שהמשתמש יעלה קובץ מהמחשב, נעזרתי בצאט
-      self.selected_file, _ = QFileDialog.getOpenFileName(
-        self, "Choose Student File", "", "CSV Files (*.csv);;All Files (*)")
+      self.selected_file = "grades.csv" 
+      #self.selected_file, _ = QFileDialog.getOpenFileName(    --ביררתי מול הצאט אם הייתי רוצה לבחור מתקייה
+        #self, "Choose Student File", "", "CSV Files (*.csv);;All Files (*)")
       if self.selected_file:
         with open(self.selected_file, 'r') as f:
             next(f)
