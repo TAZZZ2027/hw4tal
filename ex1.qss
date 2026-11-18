@@ -1,0 +1,96 @@
+QMainWindow {
+    background-color: #f5f7f0;
+}
+
+#centralWidget {
+    background-color: #f5f7f0;
+}
+
+#pageTitle {
+    color: #61263c;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+#pageSubtitle {
+    color: #59645d;
+    font-size: 14px;
+    margin-top: 0px;
+}
+
+QPushButton {
+    min-height: 40px;
+    padding: 0 18px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#chooseButton {
+    color: #263d31;
+    background-color: #c6dcaa;
+}
+
+#chooseButton:hover {
+    background-color: #b6d194;
+}
+
+#updateButton {
+    color: #4a3912;
+    background-color: #f2df91;
+    border: 2px solid #61263c;
+}
+
+#updateButton:hover {
+    background-color: #ead477;
+}
+
+#aboutButton {
+    color: #25445d;
+    background-color: #c7e2f2;
+}
+
+#aboutButton:hover {
+    background-color: #b1d5eb;
+}
+
+QPushButton:focus {
+    border: 2px solid #61263c;
+}
+
+#gradesTable {
+    background-color: #ffffff;
+    alternate-background-color: #f4f8ef;
+    color: #28332d;
+    border: 1px solid #61263c;
+    border-radius: 10px;
+    selection-background-color: #61263c;
+    selection-color: #ffffff;
+    font-size: 14px;
+}
+
+#gradesTable::item {
+    padding: 7px 12px;
+    border-bottom: 1px solid #61263c;
+}
+
+#gradesTable::item:selected {
+    background-color: #61263c;
+    color: #ffffff;
+}
+
+QHeaderView::section {
+    background-color: #d9e8ca;
+    color: #344638;
+    padding: 12px;
+    border: none;
+    border-bottom: 2px solid #61263c;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+#tableFooter {
+    color: #69756c;
+    font-size: 12px;
+}
