@@ -16,7 +16,8 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QVBoxLayout,
     QWidget,
-    QFileDialog
+    QFileDialog,
+    QSpinBox
 )
 
 
@@ -56,9 +57,11 @@ class GradeManagerWindow(QMainWindow):
 
         self.update_button = QPushButton("Update File")
         self.update_button.setObjectName("updateButton")
+        
         self.update_grade_button = QPushButton("Update Grade")
         self.update_grade_button.setObjectName("updateGradeButton")
         self.update_grade_button.clicked.connect(self.show_update_grade_dialog)
+
         self.about_button = QPushButton("About")
         self.about_button.setObjectName("aboutButton")
         self.about_button.clicked.connect(self.show_about)
@@ -113,18 +116,20 @@ class GradeManagerWindow(QMainWindow):
         layout = QVBoxLayout(dialog)
 
         student_id_label = QLabel("Student ID")
-        student_id_combo = QComboBox()
-        student_id_combo.addItems(str(student_id) for student_id in self.student_ids)
+        self.student_id_combo = QComboBox()
+        self.student_id_combo.setEditable(True)
+        self.student_id_combo.addItems(str(student_id) for student_id in self.student_ids)
         layout.addWidget(student_id_label)
-        layout.addWidget(student_id_combo)
+        layout.addWidget(self.student_id_combo)
 
         score_label = QLabel("Score / Bonus")
-        score_input = QDoubleSpinBox()
+        self.score_input = QSpinBox()
         layout.addWidget(score_label)
-        layout.addWidget(score_input)
+        layout.addWidget(self.score_input)
 
         submit_button = QPushButton("Submit")
         layout.addWidget(submit_button)
+        submit_button.clicked.connect(self.update_grade)
 
         dialog.exec()
 
@@ -159,6 +164,26 @@ class GradeManagerWindow(QMainWindow):
             self.table.setItem(i, 0, QTableWidgetItem(str(self.student_ids[i])))
             self.table.setItem(i, 1, QTableWidgetItem(str(self.original_grades[i])))
             self.table.setItem(i, 2, QTableWidgetItem(str(self.corrected_grades[i])))
+    
+    def update_grade(self):
+       self.id_choose=self.student_id_combo.currentText()
+       self.update_num =self.score_input.value() 
+       for i in range(len(self.student_ids)) :
+           if int(self.id_choose) == int(self.student_ids[i]):
+               grade = self.original_grades[i]
+               grade = grade + self.update_num
+               if(grade >= 100):
+                   grade = 100
+                   self.corrected_grades[i] = grade
+               else:
+                   self.corrected_grades[i] = grade
+
+
+       self.update_table()
+
+               
+               
+
 
 
 def main() -> int:
