@@ -143,8 +143,6 @@ class GradeManagerWindow(QMainWindow):
 
     def Choose_file_fun(self):
       self.selected_file = "grades.csv" 
-      #self.selected_file, _ = QFileDialog.getOpenFileName(    --ביררתי מול הצאט אם הייתי רוצה לבחור מתקייה
-        #self, "Choose Student File", "", "CSV Files (*.csv);;All Files (*)")
       if self.selected_file:
         with open(self.selected_file, 'r') as f:
             next(f)
@@ -178,10 +176,22 @@ class GradeManagerWindow(QMainWindow):
                else:
                    self.corrected_grades[i] = grade
 
-
+                   
        self.update_table()
 
-               
+ #   def update_exal(self):
+    #new = []
+#       with open(self.selected_file, 'r') as f:
+  #          kotert = next(f)
+  #         for l in f:
+   #             exal = l.split(',')
+  #              if int(exal[0]) == int(self.student_ids):
+                    
+                   
+
+
+
+ 
                
 
 
