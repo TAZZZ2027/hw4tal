@@ -96,3 +96,71 @@ QHeaderView::section {
     color: #69756c;
     font-size: 12px;
 }
+
+#updateGradeDialog {
+    background-color: #f5f7f0;
+}
+
+#updateGradeTitle {
+    color: #61263c;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#updateGradeSubtitle {
+    color: #59645d;
+    font-size: 13px;
+}
+
+#updateGradeFieldLabel {
+    color: #344638;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+#studentIdInput,
+#scoreInput {
+    min-height: 42px;
+    padding: 0 12px;
+    color: #28332d;
+    background-color: #ffffff;
+    border: 1px solid #a4ad9e;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+#studentIdInput:focus,
+#scoreInput:focus {
+    border: 2px solid #61263c;
+}
+
+#studentIdInput::drop-down {
+    width: 32px;
+    border: none;
+}
+
+#scoreInput::up-button,
+#scoreInput::down-button {
+    width: 24px;
+    border: none;
+    background-color: #d9e8ca;
+}
+
+#submitGradeButton {
+    min-height: 44px;
+    margin-top: 6px;
+    color: #ffffff;
+    background-color: #61263c;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#submitGradeButton:hover {
+    background-color: #7a354f;
+}
+
+#submitGradeButton:pressed {
+    background-color: #4d1d30;
+}

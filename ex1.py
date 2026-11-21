@@ -57,6 +57,7 @@ class GradeManagerWindow(QMainWindow):
 
         self.update_button = QPushButton("Update File")
         self.update_button.setObjectName("updateButton")
+        self.update_button.clicked.connect(self.update_exal)
         
         self.update_grade_button = QPushButton("Update Grade")
         self.update_grade_button.setObjectName("updateGradeButton")
@@ -179,16 +180,13 @@ class GradeManagerWindow(QMainWindow):
                    
        self.update_table()
 
- #   def update_exal(self):
-    #new = []
-#       with open(self.selected_file, 'r') as f:
-  #          kotert = next(f)
-  #         for l in f:
-   #             exal = l.split(',')
-  #              if int(exal[0]) == int(self.student_ids):
-                    
-                   
-
+    def update_exal(self):
+     new = []
+     with open(self.selected_file, 'r') as f:
+        kotert = next(f)
+     with open(self.selected_file, 'w') as f:
+        for i in range (len(self.student_ids)):
+            print(line = f"{self.student_ids[i]},{self.corrected_grades[i]}\n")
 
 
  
