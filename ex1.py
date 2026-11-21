@@ -10,7 +10,6 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
     QMainWindow,
-    QMessageBox,
     QPushButton,
     QTableWidget,
     QTableWidgetItem,
@@ -19,6 +18,8 @@ from PySide6.QtWidgets import (
     QFileDialog,
     QSpinBox
 )
+
+from about import AboutWindow
 
 
 class GradeManagerWindow(QMainWindow):
@@ -30,6 +31,7 @@ class GradeManagerWindow(QMainWindow):
         self.original_grades = [] 
         self.corrected_grades = [] 
         self.selected_file = ''
+        self.about_window = None
 
 
         self.setWindowTitle("Student Grade Manager")
@@ -112,34 +114,43 @@ class GradeManagerWindow(QMainWindow):
 
     def show_update_grade_dialog(self) -> None:
         dialog = QDialog(self)
+        dialog.setObjectName("updateGradeDialog")
         dialog.setWindowTitle("Update Grade")
 
         layout = QVBoxLayout(dialog)
 
         student_id_label = QLabel("Student ID")
+        student_id_label.setObjectName("updateGradeFieldLabel")
         self.student_id_combo = QComboBox()
-        self.student_id_combo.setEditable(True)
+        self.student_id_combo.setObjectName("studentIdInput")
+        self.student_id_combo.setMaxVisibleItems(10)
+        self.student_id_combo.view().setObjectName("studentIdList")
+        if not self.student_ids:
+            self.Choose_file_fun()
         self.student_id_combo.addItems(str(student_id) for student_id in self.student_ids)
         layout.addWidget(student_id_label)
         layout.addWidget(self.student_id_combo)
 
         score_label = QLabel("Score / Bonus")
+        score_label.setObjectName("updateGradeFieldLabel")
         self.score_input = QSpinBox()
+        self.score_input.setObjectName("scoreInput")
         layout.addWidget(score_label)
         layout.addWidget(self.score_input)
 
         submit_button = QPushButton("Submit")
+        submit_button.setObjectName("submitGradeButton")
         layout.addWidget(submit_button)
         submit_button.clicked.connect(self.update_grade)
 
         dialog.exec()
 
     def show_about(self) -> None:
-        QMessageBox.about(
-            self,
-            "About Student Grade Manager",
-            "Student Grade Manager\nReview original grades and enter corrections.",
-        )
+        if self.about_window is None:
+            self.about_window = AboutWindow()
+        self.about_window.show()
+        self.about_window.raise_()
+        self.about_window.activateWindow()
 
 
     def Choose_file_fun(self):
@@ -181,12 +192,12 @@ class GradeManagerWindow(QMainWindow):
        self.update_table()
 
     def update_exal(self):
-     new = []
      with open(self.selected_file, 'r') as f:
         kotert = next(f)
      with open(self.selected_file, 'w') as f:
+        f.write(kotert)
         for i in range (len(self.student_ids)):
-            print(line = f"{self.student_ids[i]},{self.corrected_grades[i]}\n")
+            print(f"{self.student_ids[i]},{self.corrected_grades[i]}\n", file=f)
 
 
  

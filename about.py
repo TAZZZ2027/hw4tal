@@ -1,7 +1,10 @@
 import webbrowser
-from PySide6.QtWidgets import QApplication, QWidget, QLabel
+from pathlib import Path
+
+from PySide6.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt, Signal
+
 
 class ClickableLabel(QLabel):
     clicked = Signal()
@@ -15,34 +18,40 @@ class ClickableLabel(QLabel):
 
         
 class AboutWindow(QWidget):
-
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('About Me')
-        self.setGeometry(100, 100, 360, 460)
+        self.setObjectName("aboutWindow")
+        self.setWindowTitle("About Me")
+        self.setFixedSize(380, 480)
 
-        self.my_name = QLabel('Tal Zer', self)
-        self.my_name.setGeometry(20, 20, 300, 30)
-        self.my_name.setStyleSheet('background-color:lightpink')
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(24, 22, 24, 22)
+        layout.setSpacing(12)
 
-        self.my_email = QLabel('Tal.Zer@s.afeka.ac.il', self)
-        self.my_email.setGeometry(20, 60, 300, 30)
-        self.my_email.setStyleSheet('background-color:lightpink')
+        self.my_name = QLabel("Tal Zer")
+        self.my_name.setObjectName("aboutName")
+        self.my_name.setAlignment(Qt.AlignCenter)
+        layout.addWidget(self.my_name)
 
-        self.my_picture = ClickableLabel(self)
-        self.my_picture.setGeometry(20, 110, 300, 300)
+        self.my_email = QLabel("Tal.Zer@s.afeka.ac.il")
+        self.my_email.setObjectName("aboutEmail")
+        self.my_email.setAlignment(Qt.AlignCenter)
+        layout.addWidget(self.my_email)
 
-        image = QPixmap('Eeyore.jpg').scaled(300, 300)
+        self.my_picture = ClickableLabel()
+        self.my_picture.setObjectName("aboutPicture")
+        self.my_picture.setAlignment(Qt.AlignCenter)
+        image_path = Path(__file__).with_name("Eeyore.jpg")
+        image = QPixmap(str(image_path)).scaled(
+            300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation
+        )
         self.my_picture.setPixmap(image)
-        self.my_picture.clicked.connect(self.open_facebook_video) 
-      
+        self.my_picture.clicked.connect(self.open_facebook_video)
+        layout.addWidget(self.my_picture, 1)
+
     def open_facebook_video(self):
-        url = 'https://www.facebook.com/reel/1131406196065440' 
+        url = "https://www.facebook.com/reel/1131406196065440"
         webbrowser.open(url)
-
-
-
-
 
 
 if __name__ == '__main__':

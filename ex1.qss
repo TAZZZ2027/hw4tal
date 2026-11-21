@@ -101,17 +101,6 @@ QHeaderView::section {
     background-color: #f5f7f0;
 }
 
-#updateGradeTitle {
-    color: #61263c;
-    font-size: 24px;
-    font-weight: 700;
-}
-
-#updateGradeSubtitle {
-    color: #59645d;
-    font-size: 13px;
-}
-
 #updateGradeFieldLabel {
     color: #344638;
     font-size: 13px;
@@ -136,7 +125,26 @@ QHeaderView::section {
 
 #studentIdInput::drop-down {
     width: 32px;
-    border: none;
+    border-left: 1px solid #d1d8cd;
+    background-color: #d9e8ca;
+}
+
+#studentIdList {
+    color: #28332d;
+    background-color: #ffffff;
+    border: 1px solid #61263c;
+    outline: none;
+}
+
+#studentIdList::item {
+    min-height: 32px;
+    padding: 6px 10px;
+}
+
+#studentIdList::item:selected,
+#studentIdList::item:hover {
+    color: #ffffff;
+    background-color: #61263c;
 }
 
 #scoreInput::up-button,
@@ -163,4 +171,25 @@ QHeaderView::section {
 
 #submitGradeButton:pressed {
     background-color: #4d1d30;
+}
+
+#aboutWindow {
+    background-color: #f5f7f0;
+}
+
+#aboutName {
+    color: #61263c;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#aboutEmail {
+    color: #59645d;
+    font-size: 14px;
+}
+
+#aboutPicture {
+    background-color: #ffffff;
+    border: 1px solid #d9e8ca;
+    border-radius: 10px;
 }
